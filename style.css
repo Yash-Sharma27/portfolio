@@ -7,86 +7,110 @@
   --blur: blur(12px);
 }
 
+/* ===== Global ===== */
 body {
   font-family: 'Poppins', sans-serif;
   background: var(--bg);
   color: var(--fg);
   margin: 0;
   padding: 0;
-  line-height: 1.6;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  line-height: 1.6;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* Navigation */
-header {
+/* ===== Canvas Background ===== */
+canvas#bg,
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
-  z-index: 10;
+  z-index: 100;
 }
 
-nav {
+.nav-container {
   max-width: 1200px;
   margin: auto;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  flex-wrap: wrap;
 }
 
-nav h1 {
+.logo {
+  font-size: 1.6rem;
   font-weight: 600;
-  font-size: 1.5rem;
   color: var(--accent);
 }
 
-nav ul {
-  list-style: none;
+.nav-links {
   display: flex;
+  list-style: none;
   gap: 2rem;
 }
 
-nav a {
+.nav-links li a {
   text-decoration: none;
   color: var(--fg);
   font-weight: 500;
   transition: 0.3s;
 }
 
-nav a:hover {
+.nav-links li a:hover {
   color: var(--accent);
 }
 
 #theme-toggle {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--accent);
   cursor: pointer;
+  margin-left: 1rem;
 }
 
-/* Hero Section */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--accent);
+  margin-left: 1rem;
+}
+
+/* ===== Hero ===== */
 #hero {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  position: relative;
   text-align: center;
   padding: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-text {
-  position: relative;
-  z-index: 2;
   background: var(--glass);
   backdrop-filter: var(--blur);
   padding: 2rem 3rem;
   border-radius: 20px;
   box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  z-index: 2;
 }
 
 .hero-text h2 {
@@ -95,46 +119,32 @@ nav a:hover {
   margin-bottom: 1rem;
 }
 
-.hero-text p {
-  font-size: 1.3rem;
+#typed-text {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
+  color: var(--accent);
+  min-height: 2.5rem;
+  white-space: nowrap;
 }
 
-.btn {
-  margin-top: 0.5rem;
-  background: var(--accent);
-  color: #000;
-  padding: 0.75rem 1.5rem;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-  text-decoration: none;
+.typed-cursor {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-left: 2px;
 }
 
-.btn:hover {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
-
-canvas#bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
-/* General Sections */
+/* ===== General Section Styles ===== */
 section {
-  padding: 5rem 1rem; /* smaller horizontal padding on mobiles */
+  padding: 5rem 1rem;
   max-width: 900px;
   margin: 0 auto;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
-
 
 section h2 {
   font-size: 2.5rem;
@@ -143,17 +153,26 @@ section h2 {
   color: var(--accent);
 }
 
-/* About Section */
+.section-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  line-height: 1.7;
+}
+
 #about p {
   text-align: center;
   max-width: 700px;
   margin: auto;
   font-size: 1.1rem;
   line-height: 1.8;
-  
 }
 
-/* Skills */
+/* ===== Skills ===== */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -175,7 +194,7 @@ section h2 {
   transform: translateY(-5px);
 }
 
-/* Projects Section */
+/* ===== Projects ===== */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -201,70 +220,12 @@ section h2 {
   margin-bottom: 1rem;
 }
 
-.project-card p {
-  font-size: 1rem;
-}
-
-/* Contact Section */
+/* ===== Contact ===== */
 #contact p {
   text-align: center;
   margin-bottom: 1rem;
 }
 
-#contact .btn {
-  display: inline-block;
-  margin-top: 1rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  nav ul {
-    gap: 1rem;
-  }
-
-  .hero-text {
-    padding: 1.5rem 2rem;
-  }
-
-  .hero-text h2 {
-    font-size: 2rem;
-  }
-
-  section h2 {
-    font-size: 2rem;
-  }
-}
-body.light {
-  --bg: #fdfdfd;
-  --fg: #1a1a1a;
-  --accent: #0077ff;
-  --card-bg: rgba(0, 0, 0, 0.08);  /* darker card bg */
-  --glass: rgba(0, 0, 0, 0.1);     /* slightly more visible */
-}
-
-body.light h2,
-body.light h3 {
-font-weight: 700;
-}
-
-body.light nav a:hover,
-body.light nav h1 {
-  color: var(--accent);
-}
-
-body.light .btn {
-  background: var(--accent);
-  color: #fff;
-}
-body.light .section-card {
-  color: var(--fg);          /* ensure dark font */
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-}
-
-body {
-  transition: background 0.4s ease, color 0.4s ease;
-}
 #contact a {
   color: var(--accent);
   font-weight: 600;
@@ -279,62 +240,64 @@ body {
   color: var(--bg);
 }
 
-/* For light theme */
-body.light #contact a {
+#contact .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--fg);
+  background: var(--accent);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+/* ===== Light Theme Overrides ===== */
+body.light {
+  --bg: #fdfdfd;
+  --fg: #1a1a1a;
+  --accent: #0077ff;
+  --card-bg: rgba(0, 0, 0, 0.08);
+  --glass: rgba(0, 0, 0, 0.1);
+}
+
+body.light h2,
+body.light h3 {
+  font-weight: 700;
+}
+
+body.light nav a:hover,
+body.light nav h1 {
   color: var(--accent);
+}
+
+body.light .btn {
+  background: var(--accent);
+  color: #fff;
+}
+
+body.light .section-card {
+  background: var(--card-bg);
+  color: var(--fg);
+  backdrop-filter: blur(10px);
 }
 
 body.light #contact a:hover {
   background: var(--accent);
   color: #fff;
 }
-#contact .btn {
-color: var(--fg);
-background: var(--accent);
-font-weight: 600;
-padding: 0.75rem 1.5rem;
-border-radius: 30px;
-text-decoration: none;
-}
-body.light #contact .btn {
-color: #fff;
-}
-/* 💠 Section Card Style (reusable) */
-.section-card {
-  background: var(--card-bg);
-  padding: 2rem;
-  border-radius: 15px;
-  max-width: 800px;
-  margin: 0 auto;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  line-height: 1.7;
-}
 
-/* 🎓 Education List */
-.education-list {
-  list-style: none;
-  padding: 0;
+/* ===== Education, Certs, Exp Lists ===== */
+.education-list,
+.cert-list,
+.experience-item ul {
+  text-align: left;
+  padding-left: 1.2rem;
   font-size: 1.05rem;
 }
 
-.education-list li {
+.education-list li,
+.cert-list li {
   margin-bottom: 0.8rem;
-}
-
-/* 💼 Experience */
-.experience-item h3 {
-  color: var(--accent);
-  margin-bottom: 0.4rem;
-}
-
-.experience-item ul {
-  text-align: left;
-  margin-top: 1rem;
-  padding-left: 1.2rem;
-  list-style-type: disc;
-  font-size: 1rem;
-  line-height: 1.6;
 }
 
 .experience-item small {
@@ -342,91 +305,91 @@ color: #fff;
   color: gray;
 }
 
-/* 📜 Certifications */
-.cert-list {
-  list-style-type: square;
-  text-align: left;
-  padding-left: 1.2rem;
-  font-size: 1.05rem;
-}
-.cert-list li {
-  margin-bottom: 0.5rem;
-}
-#typed-text {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem; /* ✅ Add space below text */
-  color: var(--accent);
-  min-height: 2.5rem;
-  white-space: nowrap;
-}
-
-/* ✅ Make sure cursor stays with the text */
-.typed-cursor {
-  font-size: 1.5rem;
-  color: var(--accent);
-  margin-left: 2px;
-
-}
-
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-canvas#bg {
-  position: fixed;  /* not absolute */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  pointer-events: none;
-}
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;  /* stack links vertically */
-    gap: 1rem;
-    align-items: center;
-    padding: 0;
-  }
-  nav {
+  .nav-links {
     flex-direction: column;
-    align-items: center;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: var(--glass);
+    backdrop-filter: var(--blur);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 10;
   }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideIn 0.3s ease;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hero-text {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+  }
+
   nav h1 {
     margin-bottom: 0.5rem;
   }
-  #theme-toggle {
-    margin-top: 0.5rem;
-  }
 }
+
 @media (max-width: 480px) {
   .hero-text h2 {
     font-size: 1.8rem;
   }
-  .hero-text p, section p, section li {
+
+  .hero-text p,
+  section p,
+  section li {
     font-size: 1rem;
   }
+
   .btn {
     padding: 0.6rem 1.2rem;
     font-size: 1rem;
   }
 }
-nav ul li a {
-  padding: 0.5rem 1rem;
-  display: inline-block;
+
+/* Slide in nav animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.btn {
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;  /* ✅ THIS IS IMPORTANT */
+}
+body.light .btn {
+  background: var(--accent);
+  color: #fff;
 }
 

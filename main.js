@@ -1,46 +1,47 @@
 // === AOS Animation ===
 AOS.init({ duration: 800 });
 
-// Global 3D object variables
-let material;
+// === Globals ===
 let knot;
+let material;
 
-// === DOM Ready ===
+// === Theme, Particles, Typed, 3D ===
 document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("theme-toggle");
 
-  // Load saved theme
+  // === Check saved theme or default to dark ===
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "light") {
-    document.body.classList.add("light");
-    themeToggle.textContent = "☀️";
-  } else {
-    themeToggle.textContent = "🌙";
+  const prefersDark = !savedTheme || savedTheme === "dark";
+  if (!savedTheme || savedTheme === "light") {
+    document.body.classList.add(savedTheme === "light" ? "light" : "");
+  }
+  const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
+  themeToggle.textContent = currentTheme === "light" ? "☀️" : "🌙";
+
+  // === Init particles & knot color based on theme
+  initParticles(currentTheme);
+  if (material) {
+    material.color.set(currentTheme === "light" ? 0x778899 : 0x00f0ff);
   }
 
-  // Initialize features
-  initParticles(savedTheme === "light" ? "light" : "dark");
-  init3DScene(savedTheme === "light" ? "light" : "dark");
-
-  // Theme toggle logic
+  // === Theme toggle
   themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("light");
-    const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
-    localStorage.setItem("theme", currentTheme);
-    themeToggle.textContent = currentTheme === "light" ? "☀️" : "🌙";
+    const theme = document.body.classList.contains("light") ? "light" : "dark";
+    localStorage.setItem("theme", theme);
+    themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
 
-    // Reload particles
+    // Update particles
     document.getElementById("particles-js").innerHTML = "";
-    initParticles(currentTheme);
+    initParticles(theme);
 
-    // Update 3D shape color
+    // Update 3D color
     if (material) {
-      const newColor = currentTheme === "light" ? 0x778899 : 0x00f0ff;
-      material.color.setHex(newColor);
+      material.color.set(theme === "light" ? 0x778899 : 0x00f0ff); // LightSlateGray vs Cyan
     }
   });
 
-  // Typed text animation
+  // === Typed.js
   new Typed("#typed-text", {
     strings: ["Frontend Developer", "Full Stack Developer", "Problem Solver"],
     typeSpeed: 60,
@@ -49,68 +50,84 @@ document.addEventListener("DOMContentLoaded", () => {
     loop: true,
     showCursor: false
   });
+
+  // === Mobile nav toggle
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
+  });
 });
 
-// === 3D Background Scene ===
-function init3DScene(theme = "dark") {
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#bg'), alpha: true });
+
+// === 3D TorusKnot Background ===
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#bg'), alpha: true });
+
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+camera.position.z = 40;
+
+const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+material = new THREE.MeshStandardMaterial({
+  color: 0x00f0ff,
+  metalness: 0.7,
+  roughness: 0.2
+});
+
+knot = new THREE.Mesh(geometry, material);
+scene.add(knot);
+
+// Lights
+const light1 = new THREE.PointLight(0xffffff, 1);
+light1.position.set(20, 20, 20);
+scene.add(light1);
+
+const light2 = new THREE.AmbientLight(0xffffff, 0.3);
+scene.add(light2);
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(devicePixelRatio);
-  camera.position.z = 40;
+});
 
-  // Create TorusKnot with dynamic theme-based color
-  const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-  const color = theme === "light" ? 0x778899 : 0x00f0ff;
+// Scroll movement
+let scrollOffsetY = 0;
+window.addEventListener("scroll", () => {
+  scrollOffsetY = window.scrollY || window.pageYOffset;
+});
 
-  material = new THREE.MeshStandardMaterial({
-    color: color,
-    metalness: 0.7,
-    roughness: 0.2
-  });
-
-  knot = new THREE.Mesh(geometry, material);
-  scene.add(knot);
-
-  const light1 = new THREE.PointLight(0xffffff, 1);
-  light1.position.set(20, 20, 20);
-  scene.add(light1);
-
-  const light2 = new THREE.AmbientLight(0xffffff, 0.2);
-  scene.add(light2);
-
-  let scrollOffsetY = 0;
-  window.addEventListener("scroll", () => {
-    scrollOffsetY = window.scrollY || window.pageYOffset;
-  });
-
-  window.addEventListener("resize", () => {
-    camera.aspect = innerWidth / innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    knot.rotation.x += 0.01;
-    knot.rotation.y += 0.01;
-    knot.position.y = -scrollOffsetY * 0.01;
-    renderer.render(scene, camera);
-  }
-
-  animate();
+// Animate
+function animate() {
+  requestAnimationFrame(animate);
+  knot.rotation.x += 0.01;
+  knot.rotation.y += 0.01;
+  knot.position.y = -scrollOffsetY * 0.01;
+  renderer.render(scene, camera);
 }
+animate();
 
-// === Particles.js with Theme Support ===
+
+// === Particles.js Setup ===
 function initParticles(theme = "dark") {
-  const particleColor = theme === "light" ? "#555555" : "#00f0ff";
-  const lineColor = theme === "light" ? "#555555" : "#00f0ff";
+  const particleColor = theme === "light" ? "#778899" : "#00f0ff";
+  const lineColor = theme === "light" ? "#778899" : "#00f0ff";
 
   particlesJS("particles-js", {
     particles: {
       number: {
-        value: 80,
+        value: 60,
         density: { enable: true, value_area: 800 }
       },
       color: { value: particleColor },
@@ -119,19 +136,19 @@ function initParticles(theme = "dark") {
         stroke: { width: 0, color: "#000000" }
       },
       opacity: {
-        value: 0.7,
+        value: 0.5,
         random: true
       },
       size: {
-        value: 4.5,
+        value: 3,
         random: true
       },
       line_linked: {
         enable: true,
-        distance: 120,
+        distance: 150,
         color: lineColor,
         opacity: 0.4,
-        width: 1.2
+        width: 1
       },
       move: {
         enable: true,

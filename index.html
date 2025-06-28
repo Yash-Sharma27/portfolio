@@ -6,116 +6,116 @@
   <title>Yash Sharma | Portfolio</title>
   <link rel="stylesheet" href="reset.css" />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
 </head>
+
 <body>
-    <div id="particles-js"></div>
+  <!-- 🎯 3D Background Canvas & Particles -->
+  <canvas id="bg"></canvas>
+  <div id="particles-js"></div>
 
-  <header>
-    <nav>
-  <h1>Yash Sharma</h1>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button id="theme-toggle">🌙</button>
-</nav>
+  <!-- 🔗 Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">Yash Sharma</h1>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button id="theme-toggle">🌙</button>
+      <div class="hamburger" id="hamburger">☰</div>
+    </div>
+  </nav>
 
-  </header>
-
+  <!-- ✨ Hero Section -->
   <section id="hero">
     <div class="hero-text" data-aos="fade-right">
       <h2>Hello, I'm Yash 👋</h2>
-<span id="typed-text"></span>
+      <span id="typed-text"></span>
       <a href="#contact" class="btn">Hire Me</a>
     </div>
-    <canvas id="bg"></canvas>
   </section>
 
-  <!-- About / Skills / Projects / Contact same as before but add data-aos="fade-up" -->
   <!-- 🌟 About Section -->
-<section id="about" data-aos="fade-up">
-  <h2>About Me</h2>
-  <div class="section-card">
-       <p>
-      I'm <strong>Yash Sharma</strong>, a passionate <strong>Full Stack Web Developer</strong> skilled in <strong>HTML, CSS, JavaScript, React, Node.js, and MySQL</strong>. I build responsive, user-friendly web applications with clean and scalable code.
-    </p>
-    <p>
-      I’ve gained hands-on experience through my internship at <strong>E-MAX INDIA</strong> and enjoy working with modern tools like <strong>Three.js</strong> and <strong>Firebase</strong>. I'm driven by learning, creativity, and solving real-world problems.
-    </p>
-  </div>
-</section>
+  <section id="about" data-aos="fade-up">
+    <h2>About Me</h2>
+    <div class="section-card">
+      <p>
+        I'm <strong>Yash Sharma</strong>, a passionate <strong>Full Stack Web Developer</strong> skilled in <strong>HTML, CSS, JavaScript, React, Node.js, and MySQL</strong>. I build responsive, user-friendly web applications with clean and scalable code.
+      </p>
+      <p>
+        I’ve gained hands-on experience through my internship at <strong>E-MAX INDIA</strong> and enjoy working with modern tools like <strong>Three.js</strong> and <strong>Firebase</strong>. I'm driven by learning, creativity, and solving real-world problems.
+      </p>
+    </div>
+  </section>
 
-<!-- 🎓 Education Section -->
-<section id="education" data-aos="fade-up">
-  <h2>Education</h2>
-  <div class="section-card">
-    <ul class="education-list">
-      <li><strong>MCA</strong> – GLA University, Mathura (2023–2025)</li>
-      <li><strong>BCA</strong> – VBU, Hazaribagh (2020–2023)</li>
-      <li><strong>12th</strong> – CH+2 High School, Koderma (2018–2020)</li>
-      <li><strong>10th</strong> – CH+2 High School, Koderma (2017–2018)</li>
+  <!-- 🎓 Education Section -->
+  <section id="education" data-aos="fade-up">
+    <h2>Education</h2>
+    <div class="section-card">
+      <ul class="education-list">
+        <li><strong>MCA</strong> – GLA University, Mathura (2023–2025)</li>
+        <li><strong>BCA</strong> – VBU, Hazaribagh (2020–2023)</li>
+        <li><strong>12th</strong> – CH+2 High School, Koderma (2018–2020)</li>
+        <li><strong>10th</strong> – CH+2 High School, Koderma (2017–2018)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 💼 Experience Section -->
+  <section id="experience" data-aos="fade-up">
+    <h2>Experience</h2>
+    <div class="experience-item section-card">
+      <h3>Full Stack Developer Intern – E-MAX INDIA</h3>
+      <small>(Feb 2023 – July 2023)</small>
+      <ul>
+        <li>Developed responsive websites using HTML, CSS, JS & Core Java</li>
+        <li>Integrated MySQL database for dynamic features</li>
+        <li>Collaborated with UI/UX team to implement mobile-first design</li>
+        <li>Practiced Agile methods in a collaborative team</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 📜 Certifications Section -->
+  <section id="certifications" data-aos="fade-up">
+    <h2>Certifications</h2>
+    <div class="section-card">
+      <ul class="cert-list">
+        <li>Full Stack Web Development – E-MAX INDIA</li>
+        <li>MERN Stack – Cisco Networking Academy (2023)</li>
+        <li>AI Tools Workshop – be10X (2024)</li>
+        <li>IT Support Member – Netra Kumbh 2025</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 🧠 Skills Section -->
+  <section id="skills" data-aos="fade-up">
+    <h2>Skills</h2>
+    <ul class="skills-grid">
+      <li>HTML5 & CSS3</li>
+      <li>JavaScript / ES6+</li>
+      <li>React.js / Next.js</li>
+      <li>Bootstrap</li>
+      <li>Node.js / Express.js</li>
+      <li>MongoDB / MySQL</li>
+      <li>Flutter / Firebase</li>
+      <li>Git & GitHub</li>
+      <li>REST APIs / Postman</li>
+      <li>UI/UX Designing</li>
+      <li>Problem Solving</li>
     </ul>
-  </div>
-</section>
+  </section>
 
-<!-- 💼 Experience Section -->
-<section id="experience" data-aos="fade-up">
-  <h2>Experience</h2>
-  <div class="experience-item section-card">
-    <h3>Full Stack Developer Intern – E-MAX INDIA</h3>
-    <small>(Feb 2023 – July 2023)</small>
-    <ul>
-      <li>Developed responsive websites using HTML, CSS, JS & Core Java</li>
-      <li>Integrated MySQL database for dynamic features</li>
-      <li>Collaborated with UI/UX team to implement mobile-first design</li>
-      <li>Practiced Agile methods in a collaborative team</li>
-    </ul>
-  </div>
-</section>
-
-<!-- 📜 Certifications Section -->
-<section id="certifications" data-aos="fade-up">
-  <h2>Certifications</h2>
-  <div class="section-card">
-    <ul class="cert-list">
-      <li>Full Stack Web Development – E-MAX INDIA</li>
-      <li>MERN Stack – Cisco Networking Academy (2023)</li>
-      <li>AI Tools Workshop – be10X (2024)</li>
-      <li>IT Support Member – Netra Kumbh 2025</li>
-    </ul>
-  </div>
-</section>
-
-
-
- <section id="skills" data-aos="fade-up">
-  <h2>Skills</h2>
-  <ul class="skills-grid">
-    <li>HTML5 & CSS3</li>
-    <li>JavaScript / ES6+</li>
-    <li>React.js / Next.js</li>
-    <li>Bootstrap</li>
-    <li>Node.js / Express.js</li>
-    <li>MongoDB / MySQL</li>
-    <li>Flutter / Firebase</li>
-    <li>Git & GitHub</li>
-    <li>REST APIs / Postman</li>
-    <li>UI/UX Designing</li>
-    <li>Problem Solving</li>
-  </ul>
-</section>
-
-
+  <!-- 🚀 Projects Section -->
   <section id="projects" data-aos="fade-up">
     <h2>Projects</h2>
     <div class="projects-grid">
-      <!-- repeat items with 3d hover vars -->
       <div class="project-card">
         <h3>GeoMark</h3>
         <p>App with geolocation-based attendance.</p>
@@ -131,21 +131,19 @@
     </div>
   </section>
 
+  <!-- 📞 Contact Section -->
   <section id="contact" data-aos="fade-up">
     <h2>Contact</h2>
     <p>Email: sharmayashjmt@gmail.com</p>
     <p>Phone: +91 62066 96152</p>
-   <p>
-  <a href="https://github.com/Yash-Sharma27" target="_blank">🐱 GitHub</a> |
-  <a href="https://linkedin.com/in/yashsharma39" target="_blank">💼 LinkedIn</a>
-</p>
-
-   <a href="Yash_resume_2025.pdf" class="btn" download="Yash_Sharma_Resume.pdf">Download Resume</a>
-
-
-
+    <p>
+      <a href="https://github.com/Yash-Sharma27" target="_blank">🐱 GitHub</a> |
+      <a href="https://linkedin.com/in/yashsharma39" target="_blank">💼 LinkedIn</a>
+    </p>
+    <a href="Yash_resume_2025.pdf" class="btn" download="Yash_Sharma_Resume.pdf">Download Resume</a>
   </section>
 
+  <!-- 📜 Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
